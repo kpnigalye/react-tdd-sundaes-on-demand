@@ -4,7 +4,7 @@
 
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import SummaryForm from "../summary/SummaryForm";
+import SummaryForm from "../SummaryForm";
 
 //////// interactions
 // if checkbox is enabled, button is enabled
