@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { pricePerItem } from "../constants";
+import { PRICE_PER_ITEM } from "../constants";
 
 const OrderDetils = createContext();
 
@@ -36,7 +36,7 @@ export function OrderDetailsProvider(props) {
     const countsArray = Object.values(optionCounts[optionType]);
     const totalCount = countsArray.reduce((total, value) => total + value, 0);
 
-    return totalCount * pricePerItem[optionType];
+    return totalCount * PRICE_PER_ITEM[optionType];
   };
 
   const totals = {

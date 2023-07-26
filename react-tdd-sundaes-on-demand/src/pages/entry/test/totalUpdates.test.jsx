@@ -1,11 +1,11 @@
-import { render, screen } from "@testing-library/react";
-import Options from "../Options";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
+import Options from "../Options";
 
 describe("Should update order sub-total and total", () => {
   const user = userEvent.setup();
   test("should update scoop sub-total on scoop change", async () => {
-    render(<Options orderType="scoops" />);
+    render(<Options optionType="scoops" />);
 
     // check if sub-total is $0.00
     const subTotalText = screen.getByText("Scoops total: $", { exact: false });
@@ -21,7 +21,7 @@ describe("Should update order sub-total and total", () => {
     expect(subTotalText).toHaveTextContent("2.00");
 
     // change sub-total of scoop when chocolate scoop changes to 2
-    const chocolateInput = await screen.findByRole("spinbutton", {
+    const chocolateInput = await screen.findAllByRole("spinbutton", {
       name: "Chocolate",
     });
 
