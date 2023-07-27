@@ -71,7 +71,7 @@ describe("Should update Grant Total", () => {
   });
 
   test("grand total should update properly when scoop is added first", async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
     const grandTotalText = screen.getByText("Grand total: $", { exact: false });
     const vanillaInput = await screen.findByRole("spinbutton", {
       name: /Vanilla/i,
@@ -91,7 +91,7 @@ describe("Should update Grant Total", () => {
   });
 
   test("grand total should update properly when topping is added first", async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
 
     const grandTotalText = screen.getByText("Grand total: $", { exact: false });
     const cherriesCheckbox = await screen.findByRole("checkbox", {
@@ -112,7 +112,7 @@ describe("Should update Grant Total", () => {
   });
 
   test("grand total should reset to $0.00 when all items are removed", async () => {
-    render(<OrderEntry />);
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
 
     const grandTotalText = screen.getByText("Grand total: $", { exact: false });
     const cherriesCheckbox = await screen.findByRole("checkbox", {
