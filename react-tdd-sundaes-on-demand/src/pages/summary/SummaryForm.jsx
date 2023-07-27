@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
+import { Button, Form, Popover, OverlayTrigger } from "react-bootstrap";
+import { ORDER_PHASE } from "../../constants";
 
-function SummaryForm() {
+function SummaryForm({ setOrderPhase }) {
   const [termsConfirmed, setTermsConfirmed] = useState(false);
 
   const popover = (
@@ -31,7 +30,11 @@ function SummaryForm() {
           onChange={(e) => setTermsConfirmed(e.target.checked)}
           label={checkboxLabel}
         />
-        <Button variant="primary" type="submit" disabled={!termsConfirmed}>
+        <Button
+          variant="primary"
+          disabled={!termsConfirmed}
+          onClick={() => setOrderPhase(ORDER_PHASE.COMPLETED)}
+        >
           Confirm Order
         </Button>
       </Form.Group>

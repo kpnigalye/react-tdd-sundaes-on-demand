@@ -6,9 +6,7 @@ function GrandTotal() {
   const { totals } = useOrderDetails();
 
   return (
-    <div>
-      <h2>Grand total: {formatCurrency(totals.scoops + totals.toppings)}</h2>
-    </div>
+    <h2>Grand total: {formatCurrency(totals.scoops + totals.toppings)}</h2>
   );
 }
 

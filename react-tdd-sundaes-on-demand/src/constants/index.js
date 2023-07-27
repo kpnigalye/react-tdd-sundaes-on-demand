@@ -7,3 +7,9 @@ export const OPTIONS = {
   scoops: "scoops",
   toppings: "toppings",
 };
+
+export const ORDER_PHASE = {
+  IN_PROGRESS: "inProgress",
+  REVIEW: "review",
+  COMPLETED: "completed",
+};

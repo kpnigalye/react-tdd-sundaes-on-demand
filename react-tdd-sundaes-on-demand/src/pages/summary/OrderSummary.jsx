@@ -1,9 +1,10 @@
 import React from "react";
-import SummaryForm from "./SummaryForm";
+import SummaryForm from "../summary/SummaryForm";
+import CustomCard from "../common/CustomCard";
 import { useOrderDetails } from "../../context/OrderDetails";
 import { formatCurrency } from "../../utilities";
 
-function OrderSummary() {
+function OrderSummary({ setOrderPhase }) {
   const { totals, optionCounts } = useOrderDetails();
 
   const scoopArray = Object.entries(optionCounts.scoops);
@@ -17,14 +18,14 @@ function OrderSummary() {
   const toopingList = toppingsArray.map((key) => <li key={key}>{key}</li>);
 
   return (
-    <div>
-      <h1>OrderSummary</h1>
-      <h2>Scoops: {formatCurrency(totals.scoops)}</h2>
+    <CustomCard>
+      <h1>Order Summary</h1>
+      <h4>Scoops: {formatCurrency(totals.scoops)}</h4>
       <ul>{scoopList}</ul>
-      <h2>Toppings: {formatCurrency(totals.toppings)}</h2>
+      <h4>Toppings: {formatCurrency(totals.toppings)}</h4>
       <ul>{toopingList}</ul>
-      <SummaryForm />
-    </div>
+      <SummaryForm setOrderPhase={setOrderPhase} />
+    </CustomCard>
   );
 }
 
