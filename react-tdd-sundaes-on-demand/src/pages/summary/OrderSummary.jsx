@@ -22,8 +22,12 @@ function OrderSummary({ setOrderPhase }) {
       <h1>Order Summary</h1>
       <h4>Scoops: {formatCurrency(totals.scoops)}</h4>
       <ul>{scoopList}</ul>
-      <h4>Toppings: {formatCurrency(totals.toppings)}</h4>
-      <ul>{toopingList}</ul>
+      {Object.keys(optionCounts.toppings).length > 0 && (
+        <>
+          <h4>Toppings: {formatCurrency(totals.toppings)}</h4>
+          <ul>{toopingList}</ul>
+        </>
+      )}
       <SummaryForm setOrderPhase={setOrderPhase} />
     </CustomCard>
   );

@@ -4,7 +4,7 @@ import { useOrderDetails } from "../../context/OrderDetails";
 import { OPTIONS } from "../../constants";
 
 function ScoopOption({ name, imagePath }) {
-  const { updateItemCount } = useOrderDetails();
+  const { updateItemCount, getItemScoopCount } = useOrderDetails();
   const handleChange = (event) => {
     updateItemCount(name, parseInt(event.target.value), OPTIONS.scoops);
   };
@@ -27,7 +27,7 @@ function ScoopOption({ name, imagePath }) {
         <Col xs="5" style={{ textAlign: "left" }}>
           <Form.Control
             type="number"
-            defaultValue={0}
+            value={getItemScoopCount(name).toString()}
             onChange={handleChange}
           />
         </Col>

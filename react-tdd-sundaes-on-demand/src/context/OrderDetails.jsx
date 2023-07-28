@@ -24,7 +24,12 @@ export function OrderDetailsProvider(props) {
 
   const updateItemCount = (itemName, newItemCount, optionType) => {
     const newOptionsCounts = { ...optionCounts };
-    newOptionsCounts[optionType][itemName] = newItemCount;
+    // delete item from selectedOptions if new count set is 0
+    if (newItemCount === 0) {
+      delete newOptionsCounts[optionType][itemName];
+    } else {
+      newOptionsCounts[optionType][itemName] = newItemCount;
+    }
     setOptionCounts(newOptionsCounts);
   };
 
@@ -39,11 +44,26 @@ export function OrderDetailsProvider(props) {
     return totalCount * PRICE_PER_ITEM[optionType];
   };
 
+  const getItemScoopCount = (scoop) => {
+    return scoop in optionCounts.scoops ? optionCounts.scoops[scoop] : 0;
+  };
+
+  const isToppingSelected = (topping) => {
+    return topping in optionCounts.toppings;
+  };
+
   const totals = {
     scoops: calculateTotal("scoops"),
     toppings: calculateTotal("toppings"),
   };
 
-  const value = { optionCounts, totals, updateItemCount, resetItemCount };
+  const value = {
+    optionCounts,
+    totals,
+    updateItemCount,
+    resetItemCount,
+    getItemScoopCount,
+    isToppingSelected,
+  };
   return <OrderDetils.Provider value={value} {...props} />;
 }

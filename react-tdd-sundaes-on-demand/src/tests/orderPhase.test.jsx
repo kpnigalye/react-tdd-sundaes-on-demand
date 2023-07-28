@@ -72,6 +72,9 @@ test("order phases for happy path", async () => {
   const thankYouText = await screen.findByText(/thank you/i);
   expect(thankYouText).toBeInTheDocument();
 
+  const notLoadingText = screen.queryByText("Placing Order..");
+  expect(notLoadingText).not.toBeInTheDocument();
+
   const OrderConfirmedText = await screen.findByText("Your Order number:", {
     exact: false,
   });
@@ -91,4 +94,33 @@ test("order phases for happy path", async () => {
   expect(toppingsSubTotalText).toHaveTextContent("0.00");
 
   unmount();
+});
+
+test("order phase for happy path with optional toppings", async () => {
+  const user = userEvent.setup();
+
+  render(<App />);
+
+  // find order button
+  const orderButton = screen.getByRole("button", { name: "Order" });
+
+  // add ice-cream scoops and toppings
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: /vanilla/i,
+  });
+
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "1"); // $2.00
+
+  // check if order button is enabled and click on it
+  expect(orderButton).toBeEnabled();
+  await user.click(orderButton);
+
+  const scoopsHeading = screen.getByRole("heading", {
+    name: "Scoops: $2.00",
+  });
+  expect(scoopsHeading).toBeInTheDocument();
+
+  const toppingsHeading = screen.queryByText(/Toppings/i, { exact: false });
+  expect(toppingsHeading).not.toBeInTheDocument();
 });

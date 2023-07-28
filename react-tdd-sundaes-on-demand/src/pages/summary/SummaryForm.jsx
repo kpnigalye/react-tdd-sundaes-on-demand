@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Button, Form, Popover, OverlayTrigger } from "react-bootstrap";
+import {
+  Button,
+  Form,
+  Popover,
+  OverlayTrigger,
+  ButtonGroup,
+} from "react-bootstrap";
 import { ORDER_PHASE } from "../../constants";
 
 function SummaryForm({ setOrderPhase }) {
@@ -30,13 +36,22 @@ function SummaryForm({ setOrderPhase }) {
           onChange={(e) => setTermsConfirmed(e.target.checked)}
           label={checkboxLabel}
         />
-        <Button
-          variant="primary"
-          disabled={!termsConfirmed}
-          onClick={() => setOrderPhase(ORDER_PHASE.COMPLETED)}
-        >
-          Confirm Order
-        </Button>
+
+        <ButtonGroup>
+          <Button
+            variant="primary"
+            onClick={() => setOrderPhase(ORDER_PHASE.IN_PROGRESS)}
+          >
+            Back
+          </Button>
+          <Button
+            variant="primary"
+            disabled={!termsConfirmed}
+            onClick={() => setOrderPhase(ORDER_PHASE.COMPLETED)}
+          >
+            Confirm Order
+          </Button>
+        </ButtonGroup>
       </Form.Group>
     </Form>
   );
